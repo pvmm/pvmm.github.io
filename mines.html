@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mines</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="water.css" />
+  <link rel="stylesheet" href="monokai.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav>
+    <a href="mines.html">mines</a>
+    <a href="common-ref.html">Common library reference</a>
+    <a href="game-ref.html">Game library reference</a>
+</nav>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#mines">Mines</a>
+<ul>
+<li><a href="#existing-ports-in-this-repo">Existing ports in this repo</a></li>
+<li><a href="#how-to-create-your-own">How to create your own</a></li>
+<li><a href="#how-to-generate-html-documentation">How to generate HTML documentation</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="mines">Mines</h1>
+<p>A MineSweeper clone implemented for many home consoles and computers.</p>
+<p>Licensed under GNU General Public License version 2 (or later)</p>
+<h3 id="existing-ports-in-this-repo">Existing ports in this repo</h3>
+<p>For specific build &amp; runtime/debug dependencies, please check the individual README.md files for each of the available ports below:</p>
+<ul>
+<li><p><a href="msx2-ref.html">MSX2 (screen 5)</a>: OK</p></li>
+<li><p><a href="msdos-ref.html">MSDOS (VGA mode 13h)</a>: OK</p></li>
+<li><p><a href="ncurses-ref.html">Text terminal using ncurses lib</a>: OK</p></li>
+<li><p><a href="opengl-ref.html">OpenGL</a>: OK, but with glitchy colors.</p></li>
+<li><p><a href="gunsmoke-ref.html">GunSmoke JAMMA board</a>: Slightly broken input handling.</p></li>
+<li><p><a href="psx-ref.html">PSX</a>: Work-In-Progress; Grid shows up but background is glitchy.</p></li>
+<li><p><a href="vectrex-ref.html">Vectrex</a>: Crude initial boilerplate; currently broken.</p></li>
+<li><p><a href="c64-ref.html">Commodore 64</a>: Just a boilerplate; Please consider contributing an initial implementation!</p></li>
+</ul>
+<h3 id="how-to-create-your-own">How to create your own</h3>
+<ul>
+<li><p>Create a new subdirectory in <code>platforms</code> named after the new platform;</p></li>
+<li><p>Create at least one source file (<code>.c</code> suffix) to put your platform-specific functions and macros;</p>
+<ul>
+<li>You might want to separate functions in files <code>input.c</code> and <code>video.c</code> (according to purpose) as commonly found in other platforms;</li>
+</ul></li>
+<li><p>Add <code>common.h</code> (for generic definitions) and <code>game.h</code> (for more specific game definitions) to your source files using the <code>#include</code> macro;</p></li>
+<li><p>Implement all functions and macros defined in <code>common.h</code> (follow the instructions for each in the file);</p></li>
+<li><p>Implement all functions and macros defined in <code>game.h</code> (follow the instructions for each in the file);</p></li>
+</ul>
+<p>You can compare you implementation with a preexisting one if you are stuck. <a href="platforms/ncurses">ncurses</a> should be easy to follow.</p>
+<h3 id="how-to-generate-html-documentation">How to generate HTML documentation</h3>
+<p>The following Python 3 packages should be installed:</p>
+<ul>
+<li><p>pandoc</p></li>
+<li><p>pygments</p></li>
+<li><p>pandocfilters</p></li>
+</ul>
+<p>And then execute the command</p>
+<pre><code>
+make docs
+</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
+</body>
+</html>

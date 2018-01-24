@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>vectrex-ref</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="water.css" />
+  <link rel="stylesheet" href="monokai.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav>
+    <a href="mines.html">mines</a>
+    <a href="common-ref.html">Common library reference</a>
+    <a href="game-ref.html">Game library reference</a>
+</nav>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#vectrex-port">Vectrex port</a>
+<ul>
+<li><a href="#build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="vectrex-port">Vectrex port</h2>
+<ul>
+<li><p>Tested with MAME (you can use the <code>make run</code> for that)</p></li>
+<li><p>Currently broken. Needs more work to at least figure out which Vectrex BIOS routines are useful for drawing vectors on the screen.</p></li>
+<li><p>Current linking rules are not ideal as the RAM address range ends up being included in the ROM file, which is incorrect.</p></li>
+<li><p>There may be a way of making cartridges larger than 8Kbytes. For now the Makefile simply crops the generated ROM file (mines.vec) to get rid of those higher addresses used by RAM. This ugly hack needs to be properly fixed.</p></li>
+<li><p>The built ROM does boot on MAME’s vectrex driver and the game name can be seen on the splash screen, meaning that at least the ROM headers seem fine.</p></li>
+</ul>
+<figure>
+<img src="vectrex-screenshot.png" alt="screenshot" /><figcaption aria-hidden="true">screenshot</figcaption>
+</figure>
+<h3 id="build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</h3>
+<ul>
+<li><p>cd devel/</p></li>
+<li><p>mkdir gitlab_dfffffff_gcc6809</p></li>
+<li><p>cd gitlab_dfffffff_gcc6809</p></li>
+<li><p>git clone https://gitlab.com/dfffffff/gcc6809.git</p></li>
+<li><p>cd gcc6809/ ; note: default branch is “dftools”</p></li>
+<li><p>cd build-6809/</p></li>
+<li><p>sudo apt install libgmp-dev libmpfr-dev</p></li>
+<li><p>make everything</p></li>
+<li><p>cd cd gitlab_dfffffff_gcc6809</p></li>
+<li><p>git clone https://gitlab.com/dfffffff/newlib-6809.git</p></li>
+<li><p>cd newlib-6809/</p></li>
+<li><p>cd build/</p></li>
+<li><p>; edit the file <code>newlib.6809</code> substituting <code>target:-m6809-sim-none</code> by <code>target:-m6809-unknown-none</code></p></li>
+<li><p>; and also substituting <code>target_arg:-m6809sim</code> by <code>target_arg:-m6809unknown</code></p></li>
+<li><p>./newlib.6809 config ; note: configure: WARNING: unrecognized options: –enable-multilib, –disable-malloc-debugging, –with-gnu-ld, –without-pic, –enable-target-optspace, –enable-newlib-iconv</p></li>
+<li><p>./newlib.6809 make</p></li>
+<li><p>sudo ./newlib.6809 install</p></li>
+</ul>
+<hr />
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
+</body>
+</html>

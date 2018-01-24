@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>msx2-ref</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="water.css" />
+  <link rel="stylesheet" href="monokai.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav>
+    <a href="mines.html">mines</a>
+    <a href="common-ref.html">Common library reference</a>
+    <a href="game-ref.html">Game library reference</a>
+</nav>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#msx2-port">MSX2 port</a>
+<ul>
+<li><a href="#keys">Keys</a></li>
+<li><a href="#mouse">Mouse</a></li>
+<li><a href="#openmsx">OpenMSX</a></li>
+<li><a href="#build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</a></li>
+<li><a href="#tileset-selection">Tileset selection</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="msx2-port">MSX2 port</h2>
+<figure>
+<img src="msx2-screenshot.jpg" alt="Screenshot" /><figcaption aria-hidden="true">Screenshot</figcaption>
+</figure>
+<h3 id="keys">Keys</h3>
+<ul>
+<li><p>The arrow keys move the cursor;</p></li>
+<li><p>Space key opens the current cell under the cursor;</p></li>
+<li><p><code>M</code> key toggles flag and question mark;</p></li>
+<li><p><code>N</code> key opens multiple cells at once around the cursor;</p></li>
+<li><p><code>Q</code> key reboots;</p></li>
+</ul>
+<h3 id="mouse">Mouse</h3>
+<ul>
+<li><p>Left button opens the cell under the pointer;</p></li>
+<li><p>Right button toggles flag and question mark under the pointer;</p></li>
+<li><p>Left+Right buttons open multiple cells at once under the pointer;</p></li>
+</ul>
+<h3 id="openmsx">OpenMSX</h3>
+<ul>
+<li>Middle-click will toggle mouse input grab (confines mouse events to OpenMSX window).</li>
+</ul>
+<h3 id="build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</h3>
+<ul>
+<li><p>SDCC compiler (successfully tested with 4.0.0, 4.1.0 and 4.2.0)</p></li>
+<li><p>hex2bin tool</p></li>
+<li><p>openMSX emulator with C-BIOS ROM</p></li>
+</ul>
+<p><strong>Note:</strong> The hex2bin tool can be compiled from sources available at https://gitlab.com/reidrac/ubox-msx-lib/-/blob/main/tools/hex2bin-2.0 or you can also use binaries downloaded from https://sourceforge.net/projects/hex2bin/files/</p>
+<h3 id="tileset-selection">Tileset selection</h3>
+<p>The default tileset is the classic windows theme (16x16), but you can select the grassland tileset (8x8) by typing the following command:</p>
+<pre><code>
+$ _8X8_TILES=1 make clean all
+</code></pre>
+<figure>
+<img src="msx2-screenshot2.jpg" alt="Old screenshot" /><figcaption aria-hidden="true">Old screenshot</figcaption>
+</figure>
+<hr />
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
+</body>
+</html>

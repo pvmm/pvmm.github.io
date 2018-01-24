@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Game library reference</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="water.css" />
+  <link rel="stylesheet" href="monokai.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav>
+    <a href="mines.html">mines</a>
+    <a href="common-ref.html">Common library reference</a>
+    <a href="game-ref.html">Game library reference</a>
+</nav>
+<header id="title-block-header">
+<h1 class="title">Game library reference</h1>
+<p class="subtitle">Version git-7e8df93</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#draw_counter">draw_counter</a></li>
+<li><a href="#draw_game_over">draw_game_over</a></li>
+<li><a href="#draw_minefield">draw_minefield</a></li>
+<li><a href="#draw_minefield_contents">draw_minefield_contents</a></li>
+<li><a href="#draw_scenario">draw_scenario</a></li>
+<li><a href="#draw_timer">draw_timer</a></li>
+<li><a href="#draw_title_screen">draw_title_screen</a></li>
+<li><a href="#free_minefield">free_minefield</a></li>
+<li><a href="#idle_update">idle_update</a></li>
+<li><a href="#init_minefield">init_minefield</a></li>
+<li><a href="#platform_main_loop">platform_main_loop</a></li>
+<li><a href="#reset_minefield">reset_minefield</a></li>
+<li><a href="#reset_timer">reset_timer</a></li>
+<li><a href="#set_minefield_cell">set_minefield_cell</a></li>
+<li><a href="#update_counter">update_counter</a></li>
+<li><a href="#update_timer">update_timer</a></li>
+</ul>
+</nav>
+<h2 id="draw_counter">draw_counter</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_counter</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Draw static related screen elements related to the mine counter, i. e., a frame and mine icon.</p>
+<h2 id="draw_game_over">draw_game_over</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_game_over</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Draws a game over message when the game ends. It will be called when the game ends if the <code>DRAW_GAME_OVER</code> macro is defined.</p>
+<h2 id="draw_minefield">draw_minefield</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_minefield</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="provided.svg" alt="Provided" /> Draws the background of the boardgame on screen.</p>
+<h2 id="draw_minefield_contents">draw_minefield_contents</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_minefield_contents</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="provided.svg" alt="Provided" /> Draws the playfield of the boardgame on screen.</p>
+<h2 id="draw_scenario">draw_scenario</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_scenario</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Draw the background image that surrounds the board.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<p>If coding a tile-based platform that uses <strong>tiles.h</strong> header, you can use the definition in <strong>8x8_tiles.h</strong> or <strong>16x16_tiles.h</strong> instead of writing your own.</p>
+<p>Note: some tile-based platforms use the <code>GROUND</code> tile to cover the whole background area.</p>
+<p>See <a href="#tile_index">tile_index</a> for the index value of the <code>GROUND</code> tile.</p>
+<h2 id="draw_timer">draw_timer</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_timer</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Draw static related screen elements related to the time counter, i. e., a frame and ampersand icon.</p>
+<h2 id="draw_title_screen">draw_title_screen</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_title_screen</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Draws a title screen message when the game starts. It will be called at the start of the game if the <code>DRAW_TITLE_SCREEN</code> macro is defined.</p>
+<h2 id="free_minefield">free_minefield</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">free_minefield</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Free memory and resources of the board. The default destructor is called if the <code>MINEFIELD_ALLOCATION</code> macro is not defined.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>The same resources allocated by <a href="#init_minefield">init_minefield()</a> should be released by this function.</li>
+</ul>
+<h2 id="idle_update">idle_update</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">idle_update</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="required.svg" alt="Required" /> Runs things in background, like music and animations.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>Refresh game state, like animation and music and when finished just call <a href="common-ref.html#wait_ticks">wait_ticks()</a> to wait for the next frame.</li>
+</ul>
+<h2 id="init_minefield">init_minefield</h2>
+<div class="highlight"><pre><span></span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="nf">init_minefield</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Set up memory and resources of the board. The default constructor is called if the <code>MINEFIELD_ALLOCATION</code> macro is not defined.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<p>Depending on available system resources and compiler features, you may prefer to statically reserve memory or allocate it dynamically.</p>
+<h2 id="platform_main_loop">platform_main_loop</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">platform_main_loop</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Reimplements the game loop on platforms that process their own event loop. It will be called if the <code>MAIN_LOOP_REIMPLEMENTED</code> macro is defined.</p>
+<h2 id="reset_minefield">reset_minefield</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">reset_minefield</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Set minefield to initial state, setting number of bombs and their positions in the grid. A default initialisation function is called if the <code>RESET_MINEFIELD</code> macro is not defined.</p>
+<h2 id="reset_timer">reset_timer</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">reset_timer</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Reset elapsed time before new game starts.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li><p>If <code>ENABLE_TIMER</code> is not defined, this function will not be called and the timer will not be displayed and updated during the game loop.</p></li>
+<li><p>The set of tile characters must include all the digits and the colon to separate minutes and seconds.</p></li>
+</ul>
+<h2 id="set_minefield_cell">set_minefield_cell</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">set_minefield_cell</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="provided.svg" alt="Provided" /> Update minefield cell directly for mouse, lightpen, light gun or any other type of direct input device. <code>input</code> is either <code>MINE_INPUT_OPEN</code>, <code>MINE_INPUT_OPEN_BLOCK</code> or <code>MINE_INPUT_FLAG</code>, while <code>x</code> and <code>y</code> are the minefield cell coordinates.</p>
+<h2 id="update_counter">update_counter</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">update_counter</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Display mine counter on screen.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li><p>If <code>ENABLE_COUNTER</code> is not defined, this function will not be called and the mine counter will not be displayed and updated during the game loop.</p></li>
+<li><p>The set of tile characters must include all the digits and the negative sign, since the counter may become negative.</p></li>
+</ul>
+<h2 id="update_timer">update_timer</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">update_timer</span><span class="p">(</span><span class="n">minefield</span><span class="o">*</span><span class="w"> </span><span class="n">mf</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Display elapsed time on the screen.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li><p>If <code>ENABLE_TIMER</code> is not defined, this function will not be called and the timer will not be displayed and updated during the game loop.</p></li>
+<li><p>The set of tile characters must include all the digits and the colon to separate minutes and seconds.</p></li>
+</ul>
+<hr />
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
+</body>
+</html>

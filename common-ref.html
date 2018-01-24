@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Common library reference</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="water.css" />
+  <link rel="stylesheet" href="monokai.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav>
+    <a href="mines.html">mines</a>
+    <a href="common-ref.html">Common library reference</a>
+    <a href="game-ref.html">Game library reference</a>
+</nav>
+<header id="title-block-header">
+<h1 class="title">Common library reference</h1>
+<p class="subtitle">Version git-7e8df93</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#debug">debug</a></li>
+<li><a href="#debug_break">debug_break</a></li>
+<li><a href="#debug_mode">debug_mode</a></li>
+<li><a href="#debug_msg">debug_msg</a></li>
+<li><a href="#input_read">input_read</a></li>
+<li><a href="#platform_init">platform_init</a></li>
+<li><a href="#platform_shutdown">platform_shutdown</a></li>
+<li><a href="#random_number">random_number</a></li>
+<li><a href="#wait_tick">wait_tick</a></li>
+</ul>
+</nav>
+<h2 id="debug">debug</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">debug</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Send message to emulator for debugging (printing) along with a numeric value. See <a href="#debug_mode">debug_mode()</a> for output options.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>You can undefine <code>USE_DEBUG_MODE</code> macro to transform all the debug macros into empty macros, so no additional code is generated on the release version.</li>
+</ul>
+<h2 id="debug_break">debug_break</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">debug_break</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Pause emulator at debug_break function.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>You can undefine <code>USE_DEBUG_MODE</code> macro to transform all the debug macros into empty macros, so no additional code is generated on the release version.</li>
+</ul>
+<h2 id="debug_mode">debug_mode</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">debug_mode</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Change emulator’s debug mode. This allows programs to output text and values to the emulator for debugging purposes. The format of the output value is defined below.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DEBUG_HEX</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>DEBUG_INT</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>DEBUG_BIN</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="#debug">debug()</a> for more details about the output.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>You can undefine <code>USE_DEBUG_MODE</code> macro to transform all the debug macros into empty macros, so no additional code is generated on the release version.</li>
+</ul>
+<h2 id="debug_msg">debug_msg</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">debug_msg</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Send text message to emulator for debugging (printing).</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>You can undefine <code>USE_DEBUG_MODE</code> macro to transform all the debug macros into empty macros, so no additional code is generated on the release version.</li>
+</ul>
+<h2 id="input_read">input_read</h2>
+<div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">input_read</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">source</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="required.svg" alt="Required" /> Reads input from controller or keyboard, including all the buttons and pad directions and returns immediately. <code>source</code> identifies the input source.</p>
+<p>Output is defined by the bit mask:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Bit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MINE_INPUT_IGNORED</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>MINE_INPUT_LEFT</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>MINE_INPUT_RIGHT</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>MINE_INPUT_UP</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>MINE_INPUT_DOWN</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>MINE_INPUT_OPEN</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>MINE_INPUT_OPEN_BLOCK</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li><p><strong>Fire1</strong> and <strong>fire2</strong> buttons on the keyboard should be mapped to whatever the platform defines as the default mapping for games that use the keyboard.</p></li>
+<li><p>Function should not be buffered, so combinations of keys are not processed and keys and buttons can be shadowed by other buttons with higher priority.</p></li>
+<li><p>Function is <strong>non-blocking</strong>.</p></li>
+</ul>
+<h2 id="platform_init">platform_init</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">platform_init</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="required.svg" alt="Required" /> Platform-specific initialisation code</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>A place to properly initialise graphics mode and sound settings, move tiles and sprites from ROM to RAM, etc.</li>
+</ul>
+<h2 id="platform_shutdown">platform_shutdown</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">platform_shutdown</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="required.svg" alt="Required" /> Platform-specific shutdown code</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>A place to properly change back to text mode, free previous memory allocations, etc.</li>
+</ul>
+<h2 id="random_number">random_number</h2>
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">random_number</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+
+<p><img src="required.svg" alt="Required" /> Returns a pseudo-random integer in the mathematical range <code>[min_num, max_num]</code>. If <code>min_num</code> is greater than <code>max_num</code>, they will be swapped automatically.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li><p>No assumption about seed or quality of random numbers is considered at this point. All platforms are free to pursue their own implementations as they see fit.</p></li>
+<li><p>There should be no assumption whether function is reentrant or not since reproducible behavior is not a requirement.</p></li>
+</ul>
+<h2 id="wait_tick">wait_tick</h2>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">wait_tick</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+
+<p><img src="optional.svg" alt="Optional" /> Wait for the remaining time until the next frame. It should be the last thing called inside <a href="game-ref.html#idle_update">idle_update()</a>.</p>
+<p>📌 <strong>Implementation details</strong></p>
+<ul>
+<li>No assumption is made about how many frames per second the <code>wait_tick()</code> function will try to deliver. Values should probably be around the <code>60/30/15</code> fps interval.</li>
+</ul>
+<hr />
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
+</body>
+</html>

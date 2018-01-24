@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>psx-ref</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="water.css" />
+  <link rel="stylesheet" href="monokai.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav>
+    <a href="mines.html">mines</a>
+    <a href="common-ref.html">Common library reference</a>
+    <a href="game-ref.html">Game library reference</a>
+</nav>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#psx-port">PSX Port</a>
+<ul>
+<li><a href="#installing-the-sdk">Installing the SDK</a></li>
+<li><a href="#installing-the-emulator">Installing the emulator</a></li>
+<li><a href="#building-the-project">Building the project</a></li>
+<li><a href="#running-on-real-hardware">Running on real hardware</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="psx-port">PSX Port</h1>
+<p>Using <a href="https://github.com/Lameguy64/PSn00bSDK">PSn00bSDK</a>.</p>
+<figure>
+<img src="psx-screenshot.jpg" alt="Emulator screenshot" /><figcaption aria-hidden="true">Emulator screenshot</figcaption>
+</figure>
+<figure>
+<img src="psx-running_on_real_hardware.jpg" alt="Running on real hardware" /><figcaption aria-hidden="true">Running on real hardware</figcaption>
+</figure>
+<h2 id="installing-the-sdk">Installing the SDK</h2>
+<p><strong>Do it preferably on your /tmp</strong></p>
+<p><strong>Steps written for Ubuntu/Debian</strong></p>
+<ul>
+<li>If you’re on Ubuntu/Debian, run this to install deps</li>
+</ul>
+<pre class="sh"><code>
+# Install deps
+
+sudo apt install git build-essential make ninja-build
+
+
+
+# Warning: this will uninstall your current version of cmake! 
+
+
+
+sudo apt purge cmake
+
+
+
+# Installing cmake
+
+
+
+wget https://github.com/Kitware/CMake/releases/download/v3.24.0-rc2/cmake-3.24.0-rc2-linux-x86_64.tar.gz
+
+tar xzvf cmake-3.24.0-rc2-linux-x86_64.tar.gz
+
+sudo cp cmake-3.24.0-rc2-linux-x86_64/bin/* /usr/local/bin
+
+sudo cp -R cmake-3.24.0-rc2-linux-x86_64/share/* /usr/local/share
+
+
+
+# Testing cmake
+
+cmake --version
+</code></pre>
+<ul>
+<li>Install mipsel</li>
+</ul>
+<pre class="sh"><code>
+sudo mkdir /usr/local/mipsel-none-elf
+
+cd /usr/local/mipsel-none-elf
+
+sudo wget https://github.com/Lameguy64/PSn00bSDK/releases/download/v0.19/gcc-mipsel-none-elf-11.1.0-linux.zip
+
+sudo unzip gcc-mipsel-none-elf-11.1.0-linux.zip
+</code></pre>
+<ul>
+<li>Clone the repo for <a href="https://github.com/Lameguy64/PSn00bSDK">PSn00bSDK</a> and init submodules and compile/install</li>
+</ul>
+<pre class="sh"><code>
+git submodule update --init --recursive
+
+cmake --preset default .
+
+cmake --build ./build
+
+
+
+# Don&#39;t worry, this will install to /usr/local
+
+sudo cmake --install ./build
+</code></pre>
+<h2 id="installing-the-emulator">Installing the emulator</h2>
+<p>Download the <a href="https://github.com/grumpycoders/pcsx-redux">pcsx-redux</a> emulator from <a href="https://install.appcenter.ms/orgs/grumpycoders/apps/pcsx-redux-linux64/distribution_groups/public">here</a></p>
+<p>Unzip and then run the .AppImage file.</p>
+<p>Copy the .AppImage file to your /usr/local/bin</p>
+<pre class="sh"><code>
+sudo cp PCSX-Redux-HEAD-x86_64.AppImage /usr/local/bin/pcsx-redux
+</code></pre>
+<h2 id="building-the-project">Building the project</h2>
+<pre class="sh"><code>
+export PSN00BSDK_LIBS=/usr/local/lib/libpsn00b/
+
+make build
+</code></pre>
+<p>You can then open PCSX-Redux, click on File &gt; Open ISO, then select the file on build/mines.bin. Then, click on Emulation &gt; Run.</p>
+<p>You can also burn the build to a CD or load it on your favorite emulator.</p>
+<p>Alternatively, if you have PCSX on your PATH, you can just run <code>make run</code>.</p>
+<h2 id="running-on-real-hardware">Running on real hardware</h2>
+<p>Follow this <a href="https://www.schnappy.xyz/?building_a_serial_psx_cable">tutorial</a> to make your own serial cable.</p>
+<p>Finding a link cable in Brazil can be tricky, your best bet is to find one on MercadoLivre.</p>
+<p>Download UNIROM from <a href="https://github.com/JonathanDotCel/unirom8_bootdisc_and_firmware_for_ps1/releases">here</a> and burn it to a CD. Also, clone <a href="https://github.com/JonathanDotCel/NOTPSXSerial">nops</a> and install <a href="https://www.monodevelop.com/download/">mono</a>.</p>
+<p>You can test the cable by trying to find RX and GND first. Make your connections (using a breadboard) (remember that the TX on the serial cable end should go to RX) and turn on the PlayStation with the Unirom CD inside. Keep <code>screen /dev/ttyUSB0 115200</code> running with your FTDI connected. If you’ve got the RX and GND right, you should see the message <code>Unirom TTY redirect installed!</code>. If not, change the cable and restart the console.</p>
+<p>To test TX, you can try to upload the .exe file from the build directory using nops. Go to the nops directory, copy mines.exe to there, then:</p>
+<pre class="sh"><code>
+mono nops.exe /exe mines.exe /m /dev/ttyUSB0
+</code></pre>
+<p>If you’ve got TX right, you should see <code>Sending chunk...</code> messages on your terminal and hopefully the game should start.</p>
+<hr />
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
+</body>
+</html>
