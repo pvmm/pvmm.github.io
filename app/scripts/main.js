@@ -21,7 +21,6 @@
 
 'use strict';
 
-console.log("main called.");
 const applicationServerPublicKey = '<Your Public Key>';
 const canvas = document.getElementById('canvas');
 const pushButton = document.querySelector('.js-push-btn');
@@ -80,15 +79,25 @@ function initializeUi() {
   pushButton.disabled = false;
 }
 
-// Service worker code
-console.log("Starting service worker...");
+function initializeComm() {
+  if (navigator.serviceWorker.controller != null) {
+    var messageChannel = new MessageChannel();
+    messageChannel.port1.addEventListener('message', replyHandler);
+    messageChannel.port1.start();
+    navigator.serviceWorker.controller.postMessage("ping!", [messageChannel.port2]);
+  }
+}
 
+function replyHandler(event) {
+  console.log('main.js received', event.data); // this comes from the ServiceWorker
+}
+
+// Service worker code
 if ('serviceWorker' in navigator) {
-  console.log("service worker...");
   navigator.serviceWorker
-    .register('../sw.js')
+    .register('/sw.js')
     .then(function(swReg) { 
-      console.log('Service Worker Registered', swReg); 
+      console.log('Service Worker registered', swReg); 
       swRegistration = swReg;
       initializeUi();
     })
@@ -96,7 +105,7 @@ if ('serviceWorker' in navigator) {
       console.error('Service Worker Error', error);
     });
 } else {
-  console.warn('Push messaging is not supported');
-  pushButton.textContent = 'Push Not Supported';
+  console.warn('Reload not supported');
+  pushButton.textContent = 'Reload not supported';
 }
 

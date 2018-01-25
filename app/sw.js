@@ -21,9 +21,9 @@
 
 'use strict';
 
-var dataCacheName = 'myapp-v1';
-var cacheName = 'myapp-final-1';
-var filesToCache = [
+let dataCacheName = 'myapp-v1';
+let cacheName = 'myapp-final-1';
+let filesToCache = [
   '/',
   '/index.html',
   '/sw.js',
@@ -31,6 +31,7 @@ var filesToCache = [
   '/styles/material-icons.css',
   '/styles/index.css',
   '/scripts/material.min.js',
+  '/scripts/material.min.js.map',
   '/scripts/echarts.min.js',
   '/scripts/main.js',
   '/images/badge.png',
@@ -96,7 +97,6 @@ self.addEventListener('fetch', function(e) {
      * "Cache, falling back to the network" offline strategy:
      * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network
      */
-    try {
       e.respondWith(
         caches.match(e.request).then(function(response) {
           if (response) {
@@ -104,15 +104,8 @@ self.addEventListener('fetch', function(e) {
             return response;
           }
           console.log('[Service Worker] Fetching data for [1]:', e.request.url);
-	  try {
-            return fetch(e.request);
-          } catch(error) {
-            console.log("got error");
-	  }
-        }));
-    } catch(error) {
-      console.log("got error"); 
-    }
+          return fetch(e.request);
+      }));
   } else {
     console.log('[Service Worker] Fetching data for [2]:', e.request.url);
     e.respondWith(fetch(e.request));
