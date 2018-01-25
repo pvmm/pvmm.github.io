@@ -1,14 +1,16 @@
 {
-  "name": "push-notifications",
+  "name": "cached-mobile-app",
   "version": "1.0.0",
-  "description": "Push notifications codelab.",
+  "description": "Simple mobile app.",
   "scripts": {
+    "init": "eslint --init",
     "lint": "eslint \".\"",
     "test": "npm run lint",
     "start": "node start.js"
   },
   "private": true,
   "devDependencies": {
+    "eslint": "^4.16.0",
     "lite-server": "2.3.0"
   },
   "repository": {
@@ -20,7 +22,5 @@
     "url": "https://github.com/GoogleChrome/push-notifications/issues"
   },
   "homepage": "https://github.com/GoogleChrome/push-notifications#readme",
-  "dependencies": {
-    "eslint": "^4.16.0"
-  }
+  "dependencies": {}
 }
