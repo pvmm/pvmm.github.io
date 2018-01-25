@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/GoogleChrome/push-notifications/issues"
   },
-  "homepage": "https://github.com/GoogleChrome/push-notifications#readme"
+  "homepage": "https://github.com/GoogleChrome/push-notifications#readme",
+  "dependencies": {
+    "eslint": "^4.16.0"
+  }
 }

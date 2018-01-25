@@ -15,3 +15,5 @@ dist
 .tmp
 npm-debug.log
 package-lock.json
+.eslintrc
+.travis.yml
