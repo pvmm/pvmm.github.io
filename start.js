@@ -1,7 +1,7 @@
 "use strict";
 
-const fs   = require('fs');
-const http = require("http");
+let fs   = require('fs');
+let http = require("http");
 
 http.createServer(function (request, response) {
   console.log("request.url = ", request.url);
