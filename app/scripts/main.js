@@ -95,7 +95,7 @@ function replyHandler(event) {
 // Service worker code
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/sw.js')
+    .register('/app/sw.js')
     .then(function(swReg) { 
       console.log('Service Worker registered', swReg); 
       swRegistration = swReg;
