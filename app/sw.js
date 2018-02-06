@@ -91,7 +91,7 @@ self.addEventListener('fetch', function(e) {
         });
       })
     );
-  } else if (e.request.url.indexOf('localhost:8000') > -1) {
+  } else if (e.request.url.indexOf('pvmm.github.io') > -1) {
     /*
      * The app is asking for app shell files. In this scenario the app uses the
      * "Cache, falling back to the network" offline strategy:
