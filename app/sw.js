@@ -24,18 +24,18 @@
 let dataCacheName = 'myapp-v1';
 let cacheName = 'myapp-final-1';
 let filesToCache = [
-  '/',
-  '/index.html',
-  '/sw.js',
-  '/styles/material.indigo-pink.min.css',
-  '/styles/material-icons.css',
-  '/styles/index.css',
-  '/scripts/material.min.js',
-  '/scripts/material.min.js.map',
-  '/scripts/echarts.min.js',
-  '/scripts/main.js',
-  '/images/badge.png',
-  '/images/icon.png',
+  '/app/',
+  '/app/index.html',
+  '/app/sw.js',
+  '/app/styles/material.indigo-pink.min.css',
+  '/app/styles/material-icons.css',
+  '/app/styles/index.css',
+  '/app/scripts/material.min.js',
+  '/app/scripts/material.min.js.map',
+  '/app/scripts/echarts.min.js',
+  '/app/scripts/main.js',
+  '/app/images/badge.png',
+  '/app/images/icon.png',
 ];
 
 self.addEventListener('install', function(e) {
