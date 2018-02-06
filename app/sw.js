@@ -97,15 +97,15 @@ self.addEventListener('fetch', function(e) {
      * "Cache, falling back to the network" offline strategy:
      * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network
      */
-      e.respondWith(
-        caches.match(e.request).then(function(response) {
-          if (response) {
-            console.log('[Service Worker] Fetching CACHED data for', e.request.url);
-            return response;
-          }
-          console.log('[Service Worker] Fetching data for [1]:', e.request.url);
-          return fetch(e.request);
-      }));
+    e.respondWith(
+      caches.match(e.request).then(function(response) {
+        if (response) {
+          console.log('[Service Worker] Fetching CACHED data for', e.request.url);
+          return response;
+        }
+        console.log('[Service Worker] Fetching data for [1]:', e.request.url);
+        return fetch(e.request);
+    }));
   } else {
     console.log('[Service Worker] Fetching data for [2]:', e.request.url);
     e.respondWith(fetch(e.request));

@@ -72,7 +72,7 @@ function initializeUi() {
 
   pushButton.addEventListener('click', function() {
     pushButton.disabled = true;
-    document.location = 'http://localhost:8000';
+    document.location = 'http://pvmm.github.io';
     pushButton.disabled = false;
   });
 
