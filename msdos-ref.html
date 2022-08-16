@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>msdos-ref</title>
+  <title>MSDOS port</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -22,66 +22,47 @@
 </head>
 <body>
 <nav>
-    <a href="mines.html">mines</a>
+    <a href="mines.html">Mines</a>
     <a href="common-ref.html">Common library reference</a>
     <a href="game-ref.html">Game library reference</a>
 </nav>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#msdos-port">MSDOS port</a>
-<ul>
-<li><a href="#build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</a></li>
-<li><a href="#debugging">Debugging</a></li>
-</ul></li>
-</ul>
-</nav>
 <h2 id="msdos-port">MSDOS port</h2>
 <ul>
-<li><p>Draws on VGA screen mode 0x13.</p></li>
-<li><p>Tested on DOSBOX 0.74 (you can use the <code>make run</code> for that)</p></li>
-<li><p>Also tested on real hardware (on an old 386 IBM-PC)</p></li>
+<li>Draws on VGA screen mode 0x13.</li>
+<li>Tested on DOSBOX 0.74 (you can use the <code>make run</code> for that)</li>
+<li>Also tested on real hardware (on an old 386 IBM-PC)</li>
 </ul>
-<figure>
-<img src="msdos-screenshot.png" alt="DOSBOX screenshot" /><figcaption aria-hidden="true">DOSBOX screenshot</figcaption>
-</figure>
-<figure>
-<img src="msdos-running_on_real_hardware.jpg" alt="Running on real hardware (386 PC)" /><figcaption aria-hidden="true">Running on real hardware (386 PC)</figcaption>
-</figure>
+<p><img src="msdos-screenshot.png" alt="DOSBOX screenshot" /> <img src="msdos-running_on_real_hardware.jpg" alt="Running on real hardware (386 PC)" /></p>
 <h3 id="build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</h3>
 <ul>
 <li>gcc-ia16 compiler</li>
 </ul>
 <p>Since we currently lack Debian packages for gcc-ia16, I have built mine from sources this way:</p>
 <ul>
-<li><p>sudo apt install flex bison texinfo libc6-dev-i386</p></li>
-<li><p>cd ~/devel</p></li>
-<li><p>mkdir github_tkchia</p></li>
-<li><p>cd github_tkchia</p></li>
-<li><p>git clone https://github.com/tkchia/build-ia16</p></li>
-<li><p>cd build-ia16</p></li>
-<li><p>./fetch.sh</p></li>
-<li><p>./build.sh clean</p></li>
-<li><p>./build.sh binutils</p></li>
-<li><p>./build.sh prereqs</p></li>
-<li><p>./build.sh gcc1</p></li>
-<li><p>./build.sh newlib</p></li>
-<li><p>./build.sh causeway</p></li>
-<li><p>./build.sh libi86</p></li>
-<li><p>./build.sh gcc2</p></li>
-<li><p>export PATH=$PATH:/home/fsanches/devel/github_tkchia/build-ia16/prefix/bin</p></li>
+<li>sudo apt install flex bison texinfo libc6-dev-i386</li>
+<li>cd ~/devel</li>
+<li>mkdir github_tkchia</li>
+<li>cd github_tkchia</li>
+<li>git clone https://github.com/tkchia/build-ia16</li>
+<li>cd build-ia16</li>
+<li>./fetch.sh</li>
+<li>./build.sh clean</li>
+<li>./build.sh binutils</li>
+<li>./build.sh prereqs</li>
+<li>./build.sh gcc1</li>
+<li>./build.sh newlib</li>
+<li>./build.sh causeway</li>
+<li>./build.sh libi86</li>
+<li>./build.sh gcc2</li>
+<li>export PATH=$PATH:/home/fsanches/devel/github_tkchia/build-ia16/prefix/bin</li>
 </ul>
 <p><strong>Note:</strong> Adjust your PATH environment variable according to your own personal username.</p>
 <h3 id="debugging">Debugging</h3>
-<p>If built with <code>USE_DEBUG_MODE</code> set, the game will send the debugging</p>
-<p>information through the serial port on 0x3f8 at 38400 8N1.</p>
+<p>If built with <code>USE_DEBUG_MODE</code> set, the game will send the debugging information through the serial port on 0x3f8 at 38400 8N1.</p>
 <p>If using DOSBox, one can configure it like so:</p>
-<pre><code>
-serial1=nullmodem transparent:1 server:localhost port:2323
-</code></pre>
+<pre><code>serial1=nullmodem transparent:1 server:localhost port:2323</code></pre>
 <p>And then use some utility like <code>nc</code> to wait for debugging messages:</p>
-<pre><code>
-$ nc -l -p 2323
-</code></pre>
+<pre><code>$ nc -l -p 2323</code></pre>
 <hr />
 <p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
 </body>

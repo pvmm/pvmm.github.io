@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>vectrex-ref</title>
+  <title>Vectrex port</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -22,25 +22,17 @@
 </head>
 <body>
 <nav>
-    <a href="mines.html">mines</a>
+    <a href="mines.html">Mines</a>
     <a href="common-ref.html">Common library reference</a>
     <a href="game-ref.html">Game library reference</a>
 </nav>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#vectrex-port">Vectrex port</a>
-<ul>
-<li><a href="#build-runtimedebug-dependencies">Build &amp; runtime/debug dependencies</a></li>
-</ul></li>
-</ul>
-</nav>
 <h2 id="vectrex-port">Vectrex port</h2>
 <ul>
-<li><p>Tested with MAME (you can use the <code>make run</code> for that)</p></li>
-<li><p>Currently broken. Needs more work to at least figure out which Vectrex BIOS routines are useful for drawing vectors on the screen.</p></li>
-<li><p>Current linking rules are not ideal as the RAM address range ends up being included in the ROM file, which is incorrect.</p></li>
-<li><p>There may be a way of making cartridges larger than 8Kbytes. For now the Makefile simply crops the generated ROM file (mines.vec) to get rid of those higher addresses used by RAM. This ugly hack needs to be properly fixed.</p></li>
-<li><p>The built ROM does boot on MAME’s vectrex driver and the game name can be seen on the splash screen, meaning that at least the ROM headers seem fine.</p></li>
+<li>Tested with MAME (you can use the <code>make run</code> for that)</li>
+<li>Currently broken. Needs more work to at least figure out which Vectrex BIOS routines are useful for drawing vectors on the screen.</li>
+<li>Current linking rules are not ideal as the RAM address range ends up being included in the ROM file, which is incorrect.</li>
+<li>There may be a way of making cartridges larger than 8Kbytes. For now the Makefile simply crops the generated ROM file (mines.vec) to get rid of those higher addresses used by RAM. This ugly hack needs to be properly fixed.</li>
+<li>The built ROM does boot on MAME’s vectrex driver and the game name can be seen on the splash screen, meaning that at least the ROM headers seem fine.</li>
 </ul>
 <figure>
 <img src="vectrex-screenshot.png" alt="screenshot" /><figcaption aria-hidden="true">screenshot</figcaption>
@@ -63,9 +55,8 @@
 <li><p>; and also substituting <code>target_arg:-m6809sim</code> by <code>target_arg:-m6809unknown</code></p></li>
 <li><p>./newlib.6809 config ; note: configure: WARNING: unrecognized options: –enable-multilib, –disable-malloc-debugging, –with-gnu-ld, –without-pic, –enable-target-optspace, –enable-newlib-iconv</p></li>
 <li><p>./newlib.6809 make</p></li>
-<li><p>sudo ./newlib.6809 install</p></li>
+<li><h2 id="sudo-.newlib.6809-install">sudo ./newlib.6809 install</h2>
+<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p></li>
 </ul>
-<hr />
-<p>Licensed <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.</p>
 </body>
 </html>
