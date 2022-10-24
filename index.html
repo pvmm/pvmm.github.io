@@ -27,16 +27,26 @@
 
 void main() {
     bool done = false;
-    printf("Hello world!\n");
+
+    while (!done) {
+        printf("Hello world!\n");
+    }
 }
 </pre>
 
-<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
+    editor.session.setMode("ace/mode/javascript");
+</script>
+
+<!--
+<script src="src/mode/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script>
     editor.session.setMode("ace/mode/c");
 </script>
+-->
 
 </body>
 </html>
