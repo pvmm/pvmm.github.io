@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Editor v0.0.4</title>
+  <title>Editor v0.0.8</title>
   <style type="text/css" media="screen">
     body {
         overflow: hidden;
@@ -18,7 +18,6 @@
         right: 0;
     }
   </style>
-  <script data-main="scripts/main" src="scripts/require.js"></script>
 </head>
 <body>
 
@@ -34,6 +33,13 @@ void main() {
     }
 }
 </pre>
+
+<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+ <script>
+     var editor = ace.edit("editor");
+     editor.setTheme("ace/theme/twilight");
+     editor.session.setMode("ace/mode/c");
+ </script>
 
 </body>
 </html>
