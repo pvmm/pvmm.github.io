@@ -1,3 +1,3 @@
 [submodule "ace-builds"]
 	path = ace-builds
-	url = https://github.com/pvmm/c-ace-builds
+	url = https://github.com/pvmm/ace-builds
